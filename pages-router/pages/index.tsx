@@ -3,6 +3,7 @@ import { createApolloClient } from "../client";
 import styles from "./page.module.css";
 import { Posts } from "../src/generated/graphql";
 import Image from "next/image";
+
 const POSTS_QUERY = gql`
   query POSTS_QUERY {
     posts {
@@ -36,7 +37,7 @@ const Home = ({ posts }: HomeProps) => {
               <h2>{post.title}</h2>
               <p>By: {post.author.name}</p>
               <Image
-                src={post.thumbnail || "/placeholder.png"}
+                src={post.thumbnail || "/blog.jpeg"}
                 alt={post.title || "Post image"}
                 width={500}
                 height={300}

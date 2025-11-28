@@ -2,7 +2,7 @@ import {  useQuery } from '@apollo/client';
 import { GetServerSidePropsContext } from 'next';
 import { initializeApollo, addApolloState } from '../client';
 import  RootLayout  from './layout';
-import {POSTS_QUERY} from '../src/queries/postsQuery';
+import Posts from "../src/graphql/queries/postsQuery.graphql";
 
 interface Post {
   databaseId: number;
@@ -17,14 +17,13 @@ const POSTS_PER_PAGE = 10;
 
 
 export default function SSR() {
-  const { loading, error, data } = useQuery(POSTS_QUERY, {
+  const { loading, error, data } = useQuery(Posts, {
     variables: {
       first: POSTS_PER_PAGE,
       after: null,
     },
   });
   const posts = data?.posts ?? [];
-  console.log(data, 'EEERL')
   const havePosts = Boolean(posts.length);
 
   return (
@@ -62,7 +61,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const apolloClient = initializeApollo();
 
   await apolloClient.query({
-    query: POSTS_QUERY,
+    query: Posts,
     variables: {
       first: POSTS_PER_PAGE,
       after: null,
