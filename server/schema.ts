@@ -1,0 +1,25 @@
+import { gql } from 'graphql-tag';
+ 
+export const typeDefs = gql`
+
+"A post created by a user"
+  type Query {
+    posts: [Posts!]!
+  }
+
+  type Posts {
+    id: ID!
+    title: String!
+    content: String!
+    thumbnail: String
+    author: Author!
+    createdAt: String!
+  }
+
+  "An author of posts"
+  type Author{
+    id: ID!
+    name: String!
+    photo: String
+  }
+`;
