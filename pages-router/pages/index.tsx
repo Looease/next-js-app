@@ -1,7 +1,8 @@
 import { gql } from "@apollo/client";
 import { createApolloClient } from "../client";
 import styles from "./page.module.css";
-
+import { Posts } from "../src/generated/graphql";
+import Image from "next/image";
 const POSTS_QUERY = gql`
   query POSTS_QUERY {
     posts {
@@ -17,17 +18,10 @@ const POSTS_QUERY = gql`
   }
 `;
 
-type Post = {
-  id: string;
-  title: string;
-  content: string;
-  author: { name: string };
-  thumbnail: string;
-  createdAt: string | number | Date;
-};
+
 
 interface HomeProps {
-  posts: Post[];
+  posts: Posts[];
 }
 
 const Home = ({ posts }: HomeProps) => {
@@ -40,13 +34,15 @@ const Home = ({ posts }: HomeProps) => {
           {posts.map((post) => (
             <div key={post.id} className={styles.card}>
               <h2>{post.title}</h2>
-              <p>{post.content}</p>
               <p>By: {post.author.name}</p>
-              <img
-                src={post.thumbnail}
-                alt={post.title}
+              <Image
+                src={post.thumbnail || "/placeholder.png"}
+                alt={post.title || "Post image"}
+                width={500}
+                height={300}
                 className={styles.thumbnail}
               />
+              
               <p>
                 Posted on:{" "}
                 <span>{post.createdAt}</span>

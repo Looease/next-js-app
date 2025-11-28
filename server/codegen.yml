@@ -1,0 +1,6 @@
+schema: "./schema.graphql"        # your SDL file or schema endpoint
+generates:
+  ./generated/graphql.ts:
+    plugins:
+      - "typescript"
+      - "typescript-resolvers"

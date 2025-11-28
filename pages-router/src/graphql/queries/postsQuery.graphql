@@ -1,6 +1,4 @@
-import { gql } from "@apollo/client";
 
-export const POSTS_QUERY = gql`
   query Posts {
     posts {
       id
@@ -15,4 +13,3 @@ export const POSTS_QUERY = gql`
       createdAt
     }
   }
-`;

@@ -2,7 +2,7 @@ import {  useQuery } from '@apollo/client';
 import { GetServerSidePropsContext } from 'next';
 import { initializeApollo, addApolloState } from '../client';
 import  RootLayout  from './layout';
-import {POSTS_QUERY} from './queries/postsQuery';
+import {POSTS_QUERY} from '../src/queries/postsQuery';
 
 interface Post {
   databaseId: number;
