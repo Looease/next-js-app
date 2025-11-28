@@ -1,5 +1,7 @@
 import express from 'express';
 import { ApolloServer, gql } from 'apollo-server-express';
+import { ApolloServerPluginCacheControl } from 'apollo-server-core';
+
 import { typeDefs } from './schema.js';
 
 const resolvers = {
@@ -20,9 +22,14 @@ const resolvers = {
        ],
      },
    };
+
    async function startServer() {
      const app = express();
-     const server = new ApolloServer({ typeDefs, resolvers });
+     const server = new ApolloServer({ typeDefs, resolvers,   plugins: [
+    ApolloServerPluginCacheControl({
+      defaultMaxAge: 60, 
+    }),
+  ],});
      await server.start();
      server.applyMiddleware({ app });
      app.listen({ port: 4000 }, () =>

@@ -24,7 +24,6 @@
   max-width: 800px;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
   background-color: var(--foreground);
   padding: 120px 60px;
 }
@@ -131,11 +130,83 @@ a.secondary {
     --background: #000;
     --foreground: #FFF;
 
-    --text-primary: #ededed;
+    --text-primary: #000;
     --text-secondary: #999;
 
     --button-primary-hover: #ccc;
     --button-secondary-hover: #1a1a1a;
     --button-secondary-border: #1a1a1a;
+  }
+}
+
+.title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 40px;
+  color: var(--text-primary);
+  letter-spacing: -1.5px;
+}
+
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.card {
+  display: block;
+  padding: 32px 24px;
+  border: 1px solid var(--button-secondary-border);
+  border-radius: 12px;
+  background: var(--foreground);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.card h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.card .badge {
+  display: inline-block;
+  padding: 4px 12px;
+  margin-top: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 20px;
+  background: var(--text-primary);
+  color: var(--background);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    border-color: var(--text-primary);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .card:hover {
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .cardGrid {
+    grid-template-columns: 1fr;
   }
 }
