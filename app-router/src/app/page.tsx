@@ -1,6 +1,5 @@
 "use client";
 
-import { gql } from "@apollo/client";
 import { useQuery } from "@apollo/client";
 import Image from "next/image";
 import styles from "./page.module.css";
@@ -15,20 +14,7 @@ type Post = {
 };
 
 const Home = () => {
-  const { loading, error, data } = useQuery(gql`
-    query POSTS_QUERY {
-      posts {
-        id
-        title
-        content
-        author {
-          name
-        }
-        thumbnail
-        createdAt
-      }
-    }
-  `);
+  const { loading, error, data } = useQuery()
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;

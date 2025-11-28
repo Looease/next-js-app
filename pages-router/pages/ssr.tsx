@@ -2,7 +2,7 @@ import {  useQuery } from '@apollo/client';
 import { GetServerSidePropsContext } from 'next';
 import { initializeApollo, addApolloState } from '../client';
 import  RootLayout  from './layout';
-import Posts from "../src/graphql/queries/postsQuery.graphql";
+import { POSTS_QUERY } from "../src/queries/queries";
 
 interface Post {
   databaseId: number;
@@ -17,7 +17,7 @@ const POSTS_PER_PAGE = 10;
 
 
 export default function SSR() {
-  const { loading, error, data } = useQuery(Posts, {
+  const { loading, error, data } = useQuery(POSTS_QUERY, {
     variables: {
       first: POSTS_PER_PAGE,
       after: null,

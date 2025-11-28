@@ -1,25 +1,7 @@
-import { gql } from "@apollo/client";
 import { createApolloClient } from "../client";
-import styles from "./page.module.css";
-import { Posts } from "../src/generated/graphql";
-import Image from "next/image";
-
-const POSTS_QUERY = gql`
-  query POSTS_QUERY {
-    posts {
-      id
-      title
-      content
-      author {
-        name
-      }
-      thumbnail
-      createdAt
-    }
-  }
-`;
-
-
+import styles from "../styles/global.module.css";
+import Posts from "../src/components/Posts/Posts";
+import { POSTS_QUERY } from "../src/queries/queries";
 
 interface HomeProps {
   posts: Posts[];
@@ -30,27 +12,7 @@ const Home = ({ posts }: HomeProps) => {
     <div className={styles.page}>
       <main className={styles.main}>
         <h1 className={styles.title}>Welcome to Training App</h1>
-
-        <div className={styles.grid}>
-          {posts.map((post) => (
-            <div key={post.id} className={styles.card}>
-              <h2>{post.title}</h2>
-              <p>By: {post.author.name}</p>
-              <Image
-                src={post.thumbnail || "/blog.jpeg"}
-                alt={post.title || "Post image"}
-                width={500}
-                height={300}
-                className={styles.thumbnail}
-              />
-              
-              <p>
-                Posted on:{" "}
-                <span>{post.createdAt}</span>
-              </p>
-            </div>
-          ))}
-        </div>
+        <Posts posts={posts} />
       </main>
     </div>
   );
